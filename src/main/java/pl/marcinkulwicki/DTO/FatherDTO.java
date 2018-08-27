@@ -1,15 +1,14 @@
 package pl.marcinkulwicki.DTO;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.pl.PESEL;
-import pl.marcinkulwicki.entity.Family;
 
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class FatherDTO {
+
 
     private Long id;
     @Size(min = 3, max = 20)
@@ -18,7 +17,7 @@ public class FatherDTO {
     private String secondName;
     @PESEL
     private String PESEL;
-    private Date date;
+    private SimpleDateFormat date;
     private List<FamilyDTO> familiesDTO;
 
     public FatherDTO() {
@@ -56,11 +55,11 @@ public class FatherDTO {
         this.PESEL = PESEL;
     }
 
-    public Date getDate() {
+    public SimpleDateFormat getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(SimpleDateFormat date) {
         this.date = date;
     }
 

@@ -35,12 +35,17 @@ public class FatherController {
     }
     @PostMapping
     public String addFather(@Valid FatherDTO fatherDTO, BindingResult bindingResult){
+        fatherDTO.getDate();
+
+
             if(!bindingResult.hasErrors()){
 
-                fatherService.addFather(fatherDTO);
-                return "redirect:/children";
+                if(fatherService.addFather(fatherDTO)){
+                    return "redirect:/children";
+                }
+
             }else{
-                System.out.println("Incorrect data");
+                System.out.println("Incorrect data (Father)");
             }
         return "redirect:/father";
     }

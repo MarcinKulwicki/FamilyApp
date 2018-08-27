@@ -21,7 +21,7 @@
         <form:errors path="*"/><br/>
         <form:input path="firstName" placeholder="First Name"/>
         <form:input path="secondName" placeholder="Second Name"/>
-        <form:input path="date" placeholder="Date (format 11/11/1992)"/>
+        <form:input path="date" placeholder="Date (format 29-11-1992)"/>
         <form:input path="PESEL" placeholder="PESEL"/>
         <input type="submit" value="Add Father">
     </form:form>
