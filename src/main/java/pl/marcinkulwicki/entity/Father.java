@@ -32,13 +32,9 @@ public class Father {
     @Version
     private Long idv;
 
-    @Size(min = 3, max = 20)
     private String firstName;
-    @Size(min = 3, max = 30)
     private String secondName;
-    @PESEL
     private String PESEL;
-    @NotBlank
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "father")

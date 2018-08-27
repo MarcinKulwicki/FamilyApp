@@ -1,11 +1,19 @@
 package pl.marcinkulwicki.DTO;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
+import javax.validation.constraints.Size;
+
 public class ChildDTO {
 
     private Long id;
+    @Size(min = 3, max = 20)
     private String firstName;
+    @Size(min = 3, max = 30)
     private String secondName;
+    @PESEL
     private String PESEL;
+    @Size(min = 3, max = 5) // man, woman, other
     private String sex;
     private FamilyDTO familyDTO;
 

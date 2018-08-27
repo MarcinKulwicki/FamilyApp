@@ -1,16 +1,23 @@
 package pl.marcinkulwicki.DTO;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.pl.PESEL;
 import pl.marcinkulwicki.entity.Family;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class FatherDTO {
 
     private Long id;
+    @Size(min = 3, max = 20)
     private String firstName;
+    @Size(min = 3, max = 30)
     private String secondName;
+    @PESEL
     private String PESEL;
+    @NotBlank
     private LocalDateTime date;
     private List<FamilyDTO> familiesDTO;
 

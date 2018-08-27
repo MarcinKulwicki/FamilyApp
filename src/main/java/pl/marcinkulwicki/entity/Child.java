@@ -32,13 +32,10 @@ public class Child {
     private Long idv;
 
 
-    @Size(min = 3, max = 20)
+
     private String firstName;
-    @Size(min = 3, max = 30)
     private String secondName;
-    @PESEL
     private String PESEL;
-    @Size(min = 3, max = 5) // man, woman, other
     private String sex;
 
     @ManyToOne
