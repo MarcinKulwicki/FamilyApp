@@ -6,6 +6,7 @@ import pl.marcinkulwicki.entity.Family;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class FatherDTO {
@@ -17,8 +18,7 @@ public class FatherDTO {
     private String secondName;
     @PESEL
     private String PESEL;
-    @NotBlank
-    private LocalDateTime date;
+    private Date date;
     private List<FamilyDTO> familiesDTO;
 
     public FatherDTO() {
@@ -56,11 +56,11 @@ public class FatherDTO {
         this.PESEL = PESEL;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

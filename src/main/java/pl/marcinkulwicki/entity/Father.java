@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -35,7 +36,7 @@ public class Father {
     private String firstName;
     private String secondName;
     private String PESEL;
-    private LocalDateTime date;
+    private Date date;
 
     @OneToMany(mappedBy = "father")
     private List<Family> families;
@@ -99,11 +100,11 @@ public class Father {
         this.PESEL = PESEL;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
