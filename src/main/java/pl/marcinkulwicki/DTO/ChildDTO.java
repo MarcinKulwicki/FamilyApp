@@ -15,7 +15,6 @@ public class ChildDTO {
     private String secondName;
     @PESEL
     private String PESEL;
-    @Size(min = 3, max = 5) // man, woman, other
     private String sex;
     private FamilyDTO familyDTO;
 
