@@ -13,6 +13,7 @@ import pl.marcinkulwicki.service.FatherService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -26,6 +27,8 @@ public class FatherController {
     HttpServletRequest request;
     @Autowired
     FatherService fatherService;
+    @Autowired
+    HttpSession sess;
 
     @GetMapping
     public String addFather(Model model){
@@ -40,6 +43,7 @@ public class FatherController {
             if(!bindingResult.hasErrors()){
                 System.out.println("");
                 if(fatherService.addFather(fatherDTO)){
+                    sess.setAttribute("father", fatherDTO);
                     return "redirect:/child";
                 }
 
