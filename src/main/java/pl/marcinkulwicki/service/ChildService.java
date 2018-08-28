@@ -6,13 +6,27 @@ import pl.marcinkulwicki.DTO.ChildDTO;
 import pl.marcinkulwicki.entity.Child;
 import pl.marcinkulwicki.repository.ChildRepository;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ChildService {
 
     @Autowired
     ChildRepository childRepository;
+    @Autowired
+    HttpSession sess;
 
     public boolean addChild(ChildDTO childDTO) {
+
+        List<ChildDTO> children = (List<ChildDTO>) sess.getAttribute("children");
+        if(children == null){
+            children = new ArrayList<>();
+        }
+        children.add(childDTO);
+        sess.setAttribute("children", children);
+
 
         Child child = toChild(childDTO);
         childRepository.save(child);

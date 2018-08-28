@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.marcinkulwicki.DTO.ChildDTO;
@@ -14,6 +15,7 @@ import pl.marcinkulwicki.service.ChildService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/child")
@@ -29,6 +31,7 @@ public class ChildController {
     @GetMapping
     public String addChild(Model model){
         ChildDTO child = new ChildDTO();
+        model.addAttribute("children", sess.getAttribute("children"));
         model.addAttribute("sexMap", child.getSexMap());
         model.addAttribute("child", child);
         return "child/form";
@@ -38,7 +41,6 @@ public class ChildController {
     @PostMapping
     public String addChild(@Valid ChildDTO childDTO, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
-            sess.setAttribute("child", childDTO);
             childService.addChild(childDTO);
             return "redirect:/family";
         }
