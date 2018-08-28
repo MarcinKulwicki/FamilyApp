@@ -40,7 +40,7 @@ public class FatherController {
             if(!bindingResult.hasErrors()){
                 System.out.println("");
                 if(fatherService.addFather(fatherDTO)){
-                    return "redirect:/children";
+                    return "redirect:/child";
                 }
 
             }else{
