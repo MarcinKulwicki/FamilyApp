@@ -3,8 +3,7 @@ package pl.marcinkulwicki.DTO;
 import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.validation.constraints.Size;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class FatherDTO {
@@ -17,7 +16,7 @@ public class FatherDTO {
     private String secondName;
     @PESEL
     private String PESEL;
-    private SimpleDateFormat date;
+    private Date date;
     private List<FamilyDTO> familiesDTO;
 
     public FatherDTO() {
@@ -55,11 +54,11 @@ public class FatherDTO {
         this.PESEL = PESEL;
     }
 
-    public SimpleDateFormat getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(SimpleDateFormat date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

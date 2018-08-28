@@ -35,11 +35,10 @@ public class FatherController {
     }
     @PostMapping
     public String addFather(@Valid FatherDTO fatherDTO, BindingResult bindingResult){
-        fatherDTO.getDate();
 
-
+        System.out.println("");
             if(!bindingResult.hasErrors()){
-
+                System.out.println("");
                 if(fatherService.addFather(fatherDTO)){
                     return "redirect:/children";
                 }

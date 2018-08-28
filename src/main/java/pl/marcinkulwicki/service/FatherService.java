@@ -9,7 +9,6 @@ import pl.marcinkulwicki.repository.FatherRepository;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -29,7 +28,10 @@ public class FatherService {
     }
 
     private boolean checkDateAndPesel(FatherDTO fatherDTO) {
-        String date =fatherDTO.getDate().toPattern();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+
+        String date = dateFormat.format(fatherDTO.getDate());
         String pesel = fatherDTO.getPESEL();
         if(pesel.charAt(2)=='0' || pesel.charAt(2)=='1' ){
             pesel = pesel.substring(4,6)+"-"+pesel.substring(2,4)+"-19"+pesel.substring(0,2);
@@ -42,6 +44,7 @@ public class FatherService {
         if(date.compareTo(pesel) == 0){
             return true;
         }
+        System.out.println("PESEL and DateBirth not this same (FatherService.checkDateAndPesel)");
         return false;
 
     }
@@ -51,15 +54,8 @@ public class FatherService {
         Father father = new Father();
         father.setFirstName(fatherDTO.getFirstName());
         father.setSecondName(fatherDTO.getSecondName());
+        father.setDate(fatherDTO.getDate());
 
-        SimpleDateFormat simpleDateFormat = fatherDTO.getDate();
-        Date date = new Date();
-        try {
-            father.setDate(fatherDTO.getDate().parse(fatherDTO.getDate().toPattern()));
-        }catch (ParseException e){
-            e.getErrorOffset();
-            System.out.println("Problem with parsing Date from FatherDTO to Father, in FatherService.toFather");
-        }
         //TODO change logic, all must be Data, i can convert Data to string, using http://www.codebind.com/java-tutorials/java-example-convert-date-string/
 
 
