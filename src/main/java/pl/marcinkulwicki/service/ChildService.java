@@ -57,7 +57,7 @@ public class ChildService {
 
         child.setFirstName(childDTO.getFirstName());
         child.setSecondName(childDTO.getSecondName());
-        child.setPESEL(childDTO.getPESEL());
+        child.setPesel(childDTO.getPESEL());
         child.setSex(childDTO.getSex());
 //        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
         return child;

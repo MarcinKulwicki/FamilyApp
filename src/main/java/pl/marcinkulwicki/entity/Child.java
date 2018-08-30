@@ -35,7 +35,7 @@ public class Child {
 
     private String firstName;
     private String secondName;
-    private String PESEL;
+    private String pesel;
     private String sex;
 
     @ManyToOne
@@ -92,12 +92,12 @@ public class Child {
         this.secondName = secondName;
     }
 
-    public String getPESEL() {
-        return PESEL;
+    public String getPesel() {
+        return pesel;
     }
 
-    public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public String getSex() {

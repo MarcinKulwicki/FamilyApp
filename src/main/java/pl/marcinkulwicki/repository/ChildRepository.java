@@ -6,4 +6,6 @@ import pl.marcinkulwicki.entity.Child;
 
 @Repository
 public interface ChildRepository extends JpaRepository<Child, Long> {
+
+    Child findFirstByPesel(String name);
 }

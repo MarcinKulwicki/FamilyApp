@@ -27,59 +27,51 @@ public class FamilyService {
     FamilyRepository familyRepository;
     @Autowired
     FatherRepository fatherRepository;
+    @Autowired
+    ChildRepository childRepository;
 
 
     public void addFamily(FatherDTO fatherDTO, List<ChildDTO> childs) {
 
         //CREATE FAMILY
-        Family family = createFamily();
+        Family family = new Family();
+
         //ADD FATHER TO FAMILY
-        fatherService.addFather(fatherDTO);
-        Father father = fatherRepository.findFirstByPesel(fatherDTO.getPESEL());
-        if(father == null){
-            father = new Father();
-        }
-        family = addFatherToFamily(family,father);
+        addFatherToFamily(family,fatherDTO);
 
         //ADD ALL CHILD TO FAMILY
+        Father father = fatherRepository.findFirstByPesel(fatherDTO.getPESEL());
         Iterator<ChildDTO> it = childs.iterator();
         while(it.hasNext()){
-            family = addChildToFamily(family, it.next());
+            addChildToFamily(familyRepository.findFirstByFatherId(father.getId()), it.next());
         }
-        // SAVE to db
+    }
+
+    private void createFamily(Family family){
+        familyRepository.save(family);
+    }
+
+    private void addFatherToFamily(Family family , FatherDTO fatherDTO){
+        //addFatherToDb
         fatherService.addFather(fatherDTO);
-        Family family2 = familyRepository.findFirstByFatherId(family.getFather().getId());
-        if(family2 == null){
-            familyRepository.save(family);
-        }else {
-            familyRepository.save(family2);
+        //Find this Father
+        family.setFather(
+                fatherRepository.findFirstByPesel(fatherDTO.getPESEL())
+        );
+        //addFamilyToDb
+        createFamily(family);
+    }
+
+    private void addChildToFamily(Family family, ChildDTO childDTO) {
+
+        //Search in base, if this child is alredy exsist
+        Child child = childRepository.findFirstByPesel(childDTO.getPESEL());
+        if(child == null){
+            //if not exist we can add to Db
+            child = childService.toChild(childDTO);
+            child.setFamily(family);
+            childRepository.save(child);
         }
-        //TODO jest tutaj dosc mocno namieszane najlepiej bedzie to napisac od nowa
-
-    }
-
-    private Family createFamily(){
-        Family family = new Family();
-        return family;
-    }
-
-    private Family addFatherToFamily(Family family , Father father){
-        family.setFather(father);
-        return family;
-    }
-
-    private Family addChildToFamily(Family family, ChildDTO childDTO) {
-
-        List<Child> children = family.getChildren();
-        if(children == null){
-            children = new ArrayList<>();
-        }
-
-        Child child = childService.toChild(childDTO);
-        children.add(child);
-
-        family.setChildren(children);
-        return family;
     }
 
     public FamilyDTO toFamilyDTO(Family family){
