@@ -38,7 +38,11 @@ public class ChildController {
     @PostMapping
     public String addChild(@Valid ChildDTO childDTO, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
-            childService.addChildToList(childDTO);
+            if(childService.checkPeselInDb(childDTO)){
+                childService.addChildToList(childDTO);
+            }else {
+                System.out.println("Children exist in Db (ChildController.addChild())");
+            }
         }else {
             System.out.println("Children has error in form (ChildController.addChild())");
         }

@@ -20,7 +20,7 @@
 <h2>
     Father: <h3> ${father.firstName}
     - ${father.secondName}
-    - ${father.PESEL}
+    - ${father.pesel}
     - ${father.date}
 </h3>
 </h2>
@@ -39,7 +39,7 @@
         <tr>
             <td>${child.firstName}</td>
             <td>${child.secondName}</td>
-            <td>${child.PESEL}</td>
+            <td>${child.pesel}</td>
             <td>${child.sex}</td>
         </tr>
         </c:forEach>

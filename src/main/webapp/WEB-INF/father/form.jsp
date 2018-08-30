@@ -22,7 +22,7 @@
         <form:input path="firstName" placeholder="First Name"/>
         <form:input path="secondName" placeholder="Second Name"/>
         <form:input path="date" placeholder="Date (format 1992/11/29)"/>
-        <form:input path="PESEL" placeholder="PESEL"/>
+        <form:input path="pesel" placeholder="PESEL"/>
         <input type="submit" value="Add Father">
     </form:form>
 

@@ -57,11 +57,18 @@ public class ChildService {
 
         child.setFirstName(childDTO.getFirstName());
         child.setSecondName(childDTO.getSecondName());
-        child.setPesel(childDTO.getPESEL());
+        child.setPesel(childDTO.getPesel());
         child.setSex(childDTO.getSex());
 //        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
         return child;
     }
 
+    public boolean checkPeselInDb(ChildDTO childDTO){
+
+        if(childRepository.findFirstByPesel(childDTO.getPesel()) == null ){
+            return true;
+        }
+        return false;
+    }
 
 }

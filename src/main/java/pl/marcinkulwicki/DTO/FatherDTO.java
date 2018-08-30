@@ -15,7 +15,7 @@ public class FatherDTO {
     @Size(min = 3, max = 30)
     private String secondName;
     @PESEL
-    private String PESEL;
+    private String pesel;
     private Date date;
     private List<FamilyDTO> familiesDTO;
 
@@ -46,12 +46,12 @@ public class FatherDTO {
         this.secondName = secondName;
     }
 
-    public String getPESEL() {
-        return PESEL;
+    public String getPesel() {
+        return pesel;
     }
 
-    public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public Date getDate() {
