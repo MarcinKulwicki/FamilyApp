@@ -3,6 +3,8 @@ package pl.marcinkulwicki.DTO;
 import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.validation.constraints.Size;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChildDTO {
 
@@ -13,11 +15,17 @@ public class ChildDTO {
     private String secondName;
     @PESEL
     private String PESEL;
-    @Size(min = 3, max = 5) // man, woman, other
     private String sex;
     private FamilyDTO familyDTO;
 
+    private Map< String, String > sexMap = new HashMap<>();
+
+
     public ChildDTO() {
+
+        sexMap.put("man", "Man");
+        sexMap.put("woman", "Woman");
+        sexMap.put("other", "Other");
     }
 
     public Long getId() {
@@ -67,4 +75,9 @@ public class ChildDTO {
     public void setFamilyDTO(FamilyDTO familyDTO) {
         this.familyDTO = familyDTO;
     }
+
+    public Map<String, String> getSexMap() {
+        return sexMap;
+    }
+
 }

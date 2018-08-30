@@ -31,7 +31,7 @@ public class Father {
 
     private String firstName;
     private String secondName;
-    private String PESEL;
+    private String pesel;
     private Date date;
 
     @OneToMany(mappedBy = "father")
@@ -88,12 +88,12 @@ public class Father {
         this.secondName = secondName;
     }
 
-    public String getPESEL() {
-        return PESEL;
+    public String getPesel() {
+        return pesel;
     }
 
-    public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public Date getDate() {
