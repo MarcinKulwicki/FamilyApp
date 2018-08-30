@@ -6,16 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.marcinkulwicki.DTO.ChildDTO;
-import pl.marcinkulwicki.entity.Child;
 import pl.marcinkulwicki.service.ChildService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/child")
@@ -41,10 +38,10 @@ public class ChildController {
     @PostMapping
     public String addChild(@Valid ChildDTO childDTO, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
-            childService.addChild(childDTO);
-            return "redirect:/family";
+            childService.addChildToList(childDTO);
+        }else {
+            System.out.println("Children has error in form (ChildController.addChild())");
         }
-        System.out.println("Children has error in form");
         return "redirect:/child";
     }
 

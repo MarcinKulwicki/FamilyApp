@@ -2,6 +2,7 @@ package pl.marcinkulwicki.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.marcinkulwicki.DTO.FamilyDTO;
 import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.entity.Father;
 import pl.marcinkulwicki.repository.FatherRepository;
@@ -27,7 +28,7 @@ public class FatherService {
         return true;
     }
 
-    private boolean checkDateAndPesel(FatherDTO fatherDTO) {
+    public boolean checkDateAndPesel(FatherDTO fatherDTO) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
@@ -49,18 +50,25 @@ public class FatherService {
 
     }
 
-    private Father toFather(FatherDTO fatherDTO) {
+    public Father toFather(FatherDTO fatherDTO) {
 
         Father father = new Father();
         father.setFirstName(fatherDTO.getFirstName());
         father.setSecondName(fatherDTO.getSecondName());
         father.setDate(fatherDTO.getDate());
-
-        //TODO change logic, all must be Data, i can convert Data to string, using http://www.codebind.com/java-tutorials/java-example-convert-date-string/
-
-
         father.setPESEL(fatherDTO.getPESEL());
 
         return father;
+    }
+
+    public FatherDTO toFatherDTO(Father father) {
+
+        FatherDTO fatherDTO = new FatherDTO();
+        fatherDTO.setFirstName(father.getFirstName());
+        fatherDTO.setSecondName(father.getSecondName());
+        fatherDTO.setDate(father.getDate());
+        fatherDTO.setPESEL(father.getPESEL());
+
+        return fatherDTO;
     }
 }

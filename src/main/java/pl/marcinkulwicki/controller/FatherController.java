@@ -42,7 +42,7 @@ public class FatherController {
         System.out.println("");
             if(!bindingResult.hasErrors()){
                 System.out.println("");
-                if(fatherService.addFather(fatherDTO)){
+                if(fatherService.checkDateAndPesel(fatherDTO)){
                     sess.setAttribute("father", fatherDTO);
                     return "redirect:/child";
                 }

@@ -12,7 +12,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
-    <title>Father Form</title>
+    <title>Child Form</title>
 </head>
 <body>
 <c:import url="../fragments/header.jsp"/>
@@ -31,9 +31,32 @@
 
 
 <c:if test="${not empty children}">
+
+        <h4>
+            Do you want create family?
+            <a href="/family/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Yes</a>
+        </h4>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Second Name</th>
+                <th scope="col">PESEL</th>
+                <th scope="col">sex</th>
+            </tr>
+            </thead>
+            <tbody>
     <c:forEach items="${children}" var="child">
-        ${child.firstName} \\\
+            <tr>
+                <td>${child.firstName}</td>
+                <td>${child.secondName}</td>
+                <td>${child.PESEL}</td>
+                <td>${child.sex}</td>
+            </tr>
     </c:forEach>
+            </tbody>
+        </table>
 </c:if>
 
 
