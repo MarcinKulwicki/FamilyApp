@@ -35,6 +35,7 @@ public class Child {
 
     private String firstName;
     private String secondName;
+    @Column(unique = true)
     private String pesel;
     private String sex;
 

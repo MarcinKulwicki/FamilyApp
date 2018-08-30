@@ -21,7 +21,7 @@
         <form:errors path="*"/><br/>
         <form:input path="firstName" placeholder="First Name"/>
         <form:input path="secondName" placeholder="Second Name"/>
-        <form:input path="PESEL" placeholder="PESEL"/>
+        <form:input path="pesel" placeholder="PESEL"/>
         <form:select path="sex">
             <form:option value="-" label="--Select sex--"/>
             <form:options items="${sexMap}"/>
@@ -51,7 +51,7 @@
             <tr>
                 <td>${child.firstName}</td>
                 <td>${child.secondName}</td>
-                <td>${child.PESEL}</td>
+                <td>${child.pesel}</td>
                 <td>${child.sex}</td>
             </tr>
     </c:forEach>

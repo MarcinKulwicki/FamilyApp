@@ -40,7 +40,7 @@ public class FamilyService {
         addFatherToFamily(family,fatherDTO);
 
         //ADD ALL CHILD TO FAMILY
-        Father father = fatherRepository.findFirstByPesel(fatherDTO.getPESEL());
+        Father father = fatherRepository.findFirstByPesel(fatherDTO.getPesel());
         Iterator<ChildDTO> it = childs.iterator();
         while(it.hasNext()){
             addChildToFamily(familyRepository.findFirstByFatherId(father.getId()), it.next());
@@ -56,7 +56,7 @@ public class FamilyService {
         fatherService.addFather(fatherDTO);
         //Find this Father
         family.setFather(
-                fatherRepository.findFirstByPesel(fatherDTO.getPESEL())
+                fatherRepository.findFirstByPesel(fatherDTO.getPesel())
         );
         //addFamilyToDb
         createFamily(family);
@@ -65,7 +65,7 @@ public class FamilyService {
     private void addChildToFamily(Family family, ChildDTO childDTO) {
 
         //Search in base, if this child is alredy exsist
-        Child child = childRepository.findFirstByPesel(childDTO.getPESEL());
+        Child child = childRepository.findFirstByPesel(childDTO.getPesel());
         if(child == null){
             //if not exist we can add to Db
             child = childService.toChild(childDTO);

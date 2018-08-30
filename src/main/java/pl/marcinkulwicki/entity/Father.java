@@ -31,6 +31,7 @@ public class Father {
 
     private String firstName;
     private String secondName;
+    @Column(unique = true)
     private String pesel;
     private Date date;
 

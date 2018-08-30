@@ -14,7 +14,7 @@ public class ChildDTO {
     @Size(min = 3, max = 30)
     private String secondName;
     @PESEL
-    private String PESEL;
+    private String pesel;
     private String sex;
     private FamilyDTO familyDTO;
 
@@ -52,12 +52,12 @@ public class ChildDTO {
         this.secondName = secondName;
     }
 
-    public String getPESEL() {
-        return PESEL;
+    public String getPesel() {
+        return pesel;
     }
 
-    public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public String getSex() {
