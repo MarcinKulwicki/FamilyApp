@@ -56,7 +56,7 @@ public class FatherService {
         father.setFirstName(fatherDTO.getFirstName());
         father.setSecondName(fatherDTO.getSecondName());
         father.setDate(fatherDTO.getDate());
-        father.setPESEL(fatherDTO.getPESEL());
+        father.setPesel(fatherDTO.getPESEL());
 
         return father;
     }
@@ -67,7 +67,7 @@ public class FatherService {
         fatherDTO.setFirstName(father.getFirstName());
         fatherDTO.setSecondName(father.getSecondName());
         fatherDTO.setDate(father.getDate());
-        fatherDTO.setPESEL(father.getPESEL());
+        fatherDTO.setPESEL(father.getPesel());
 
         return fatherDTO;
     }

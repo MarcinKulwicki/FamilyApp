@@ -54,12 +54,12 @@ public class ChildService {
     public Child toChild(ChildDTO childDTO) {
         Child child = new Child();
 
+
         child.setFirstName(childDTO.getFirstName());
         child.setSecondName(childDTO.getSecondName());
         child.setPESEL(childDTO.getPESEL());
         child.setSex(childDTO.getSex());
-        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
-
+//        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
         return child;
     }
 
