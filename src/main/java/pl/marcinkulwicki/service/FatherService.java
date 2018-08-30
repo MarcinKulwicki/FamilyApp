@@ -23,8 +23,7 @@ public class FatherService {
         if(!checkDateAndPesel(fatherDTO)){
             return false;
         }
-        Father father = toFather(fatherDTO);
-        fatherRepository.save(father);
+        fatherRepository.save(toFather(fatherDTO));
         return true;
     }
 
