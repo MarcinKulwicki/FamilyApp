@@ -34,7 +34,6 @@ public class ChildController {
         return "child/form";
     }
 
-    //TODO jak juz bedzie dzialac to zapytanie do bazy dopiero jak bedzie zebrana cala rodzina!!
     @PostMapping
     public String addChild(@Valid ChildDTO childDTO, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){

@@ -62,6 +62,29 @@ public class ChildService {
 //        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
         return child;
     }
+    private ChildDTO toChildDTO(Child child){
+        ChildDTO childDTO = new ChildDTO();
+
+        childDTO.setFirstName(child.getFirstName());
+        childDTO.setSecondName(child.getSecondName());
+        childDTO.setPesel(child.getPesel());
+        childDTO.setSex(child.getSex());
+        childDTO.setFamilyDTO(familyService.toFamilyDTO(child.getFamily()));
+
+        return childDTO;
+    }
+
+    public List<ChildDTO> toChildListDTO(List<Child> childs){
+
+        List<ChildDTO> childsDTO = new ArrayList<>();
+
+        Iterator<Child> it = childs.iterator();
+        while (it.hasNext()){
+            childsDTO.add(toChildDTO(it.next()));
+        }
+
+        return childsDTO;
+    }
 
     public boolean checkPeselInDb(ChildDTO childDTO){
 

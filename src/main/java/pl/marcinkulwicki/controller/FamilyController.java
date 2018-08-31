@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.marcinkulwicki.DTO.ChildDTO;
@@ -48,14 +49,17 @@ public class FamilyController {
 
         ChildDTO child = new ChildDTO();
 
+        model.addAttribute("childsFind", sess.getAttribute("childsFind"));
         model.addAttribute("sexMap", child.getSexMap());
         model.addAttribute("child", child);
         return "family/search";
     }
     @PostMapping("/search")
-    public String searchFamily(@Valid ChildDTO childDTO, BindingResult bindingResult){
+    public String searchFamily(@ModelAttribute ChildDTO childDTO){
 
-        List<Child> childs = familyService.searchChild(childDTO);
+        List<ChildDTO> childs = familyService.searchChild(childDTO);
+        sess.setAttribute("childsFind", childs);
+
         return "redirect:/family/search";
     }
 }

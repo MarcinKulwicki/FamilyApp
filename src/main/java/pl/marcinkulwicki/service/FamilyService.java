@@ -79,7 +79,7 @@ public class FamilyService {
     public FamilyDTO toFamilyDTO(Family family){
         FamilyDTO familyDTO = new FamilyDTO();
         familyDTO.setId(family.getId());
-        familyDTO.setFatherDTO(fatherService.toFatherDTO(family.getFather()));
+        //familyDTO.setFatherDTO(fatherService.toFatherDTO(family.getFather()));
 
         return familyDTO;
     }
@@ -93,7 +93,7 @@ public class FamilyService {
     }
 
 
-    public List<Child> searchChild(ChildDTO childDTO) {
+    public List<ChildDTO> searchChild(ChildDTO childDTO) {
 
         childDTO = convertChildDTOToQuery(childDTO);
 
@@ -106,7 +106,9 @@ public class FamilyService {
         );
 
         System.out.println("");
-        return childs;
+
+
+        return childService.toChildListDTO(childs);
     }
 
     private ChildDTO convertChildDTOToQuery(ChildDTO childQuery) {
