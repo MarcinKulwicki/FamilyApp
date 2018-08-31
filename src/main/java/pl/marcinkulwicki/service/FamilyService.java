@@ -8,6 +8,8 @@ import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.entity.Child;
 import pl.marcinkulwicki.entity.Family;
 import pl.marcinkulwicki.entity.Father;
+import pl.marcinkulwicki.helpers.DateMatcher;
+import pl.marcinkulwicki.helpers.GregorianDateMatcher;
 import pl.marcinkulwicki.repository.ChildRepository;
 import pl.marcinkulwicki.repository.FamilyRepository;
 import pl.marcinkulwicki.repository.FatherRepository;
@@ -91,4 +93,67 @@ public class FamilyService {
     }
 
 
+    public List<Child> searchChild(ChildDTO childDTO) {
+
+        childDTO = convertChildDTOToQuery(childDTO);
+
+        List<Child> childs = childRepository.findAllBySearchParameters(
+                childDTO.getFirstName(),
+                childDTO.getSecondName(),
+                childDTO.getSex(),
+                childDTO.getPesel(),
+                childDTO.getDate()
+        );
+
+        System.out.println("");
+        return childs;
+    }
+
+    private ChildDTO convertChildDTOToQuery(ChildDTO childQuery) {
+
+        //FirstName
+        if(childQuery.getFirstName() == null || childQuery.getFirstName().length() < 3){
+            childQuery.setFirstName("%");
+        }
+        //SecondName
+        if(childQuery.getSecondName() == null || childQuery.getSecondName().length() < 3){
+            childQuery.setSecondName("%");
+        }
+        //Sex
+        if(childQuery.getSex().length() < 3){
+            childQuery.setSex("%");
+        }
+        //Pesel
+        if(childQuery.getPesel() == null || childQuery.getSecondName().length() < 6){
+            childQuery.setPesel("%");
+        }
+        //Date
+        childQuery.setDate(convertDateToPesel(childQuery.getDate()));
+
+        return childQuery;
+    }
+
+    private String convertDateToPesel(String date) {
+
+        DateMatcher dateMatcher = new GregorianDateMatcher();
+
+        //For null
+        if(date == null) date = "%";
+        //Incorrect date format
+        if(!dateMatcher.matches(date)){ date = "%";}
+        else {
+            //Format is correct
+            int yy = Integer.parseInt(date.split("/")[0]);
+            int MM = Integer.parseInt(date.split("/")[1]);
+            int dd = Integer.parseInt(date.split("/")[2]);
+
+            if(yy>1999) MM += 20;
+
+            date = (yy+""+MM+""+dd+"%").substring(2);
+
+            System.out.println("");
+        }
+
+        return date;
+    }
 }

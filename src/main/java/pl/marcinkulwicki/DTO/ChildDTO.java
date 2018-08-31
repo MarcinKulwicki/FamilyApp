@@ -3,6 +3,7 @@ package pl.marcinkulwicki.DTO;
 import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class ChildDTO {
     private String pesel;
     private String sex;
     private FamilyDTO familyDTO;
+    private String date;
 
     private Map< String, String > sexMap = new HashMap<>();
 
@@ -58,6 +60,14 @@ public class ChildDTO {
 
     public void setPesel(String pesel) {
         this.pesel = pesel;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getSex() {
