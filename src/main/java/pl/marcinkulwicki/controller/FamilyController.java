@@ -14,6 +14,7 @@ import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.service.FamilyService;
 
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -30,7 +31,9 @@ public class FamilyController {
 
         if(id != null) familyService.readFamily(id);
         model.addAttribute("father", sess.getAttribute("father"));
-        model.addAttribute("children", sess.getAttribute("children"));
+        List<ChildDTO> childs = (List<ChildDTO>)sess.getAttribute("children");
+        childs.sort(Comparator.comparing(ChildDTO::getSecondName));
+        model.addAttribute("children", childs);
         return "family/list";
     }
 
@@ -57,6 +60,8 @@ public class FamilyController {
     public String searchFamily(@ModelAttribute ChildDTO childDTO){
 
         List<ChildDTO> childs = familyService.searchChild(childDTO);
+        //childs.sort(Comparator.comparing(ChildDTO::getSecondName));
+        childs.sort((o1, o2) -> o1.getSecondName().compareToIgnoreCase(o2.getSecondName()));
         sess.setAttribute("childsFind", childs);
 
         return "redirect:/family/search";
