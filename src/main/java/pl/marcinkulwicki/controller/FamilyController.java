@@ -2,6 +2,7 @@ package pl.marcinkulwicki.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +29,9 @@ public class FamilyController {
     FamilyService familyService;
 
     @GetMapping
-    public String showFamily(Model model){
+    public String showFamily(Model model, @Param("id") Long id){
 
+        if(id != null) familyService.readFamily(id);
         model.addAttribute("father", sess.getAttribute("father"));
         model.addAttribute("children", sess.getAttribute("children"));
         return "family/list";

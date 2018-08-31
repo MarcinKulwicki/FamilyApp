@@ -44,6 +44,7 @@ public class FatherController {
                 System.out.println("");
                 if(fatherService.checkDateAndPesel(fatherDTO)){
                     sess.setAttribute("father", fatherDTO);
+                    sess.setAttribute("children" , null);
                     return "redirect:/child";
                 }
 

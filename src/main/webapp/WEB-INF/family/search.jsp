@@ -50,7 +50,7 @@
                 <td>${child.secondName}</td>
                 <td>${child.pesel}</td>
                 <td>${child.sex}</td>
-                <td><a href="/family/id='${child.familyDTO.id}'" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Detail</a></td>
+                <td><a href="/family?id=${child.familyDTO.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Detail</a></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -14,6 +14,7 @@ import pl.marcinkulwicki.repository.ChildRepository;
 import pl.marcinkulwicki.repository.FamilyRepository;
 import pl.marcinkulwicki.repository.FatherRepository;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,8 @@ public class FamilyService {
     FatherRepository fatherRepository;
     @Autowired
     ChildRepository childRepository;
+    @Autowired
+    HttpSession sess;
 
 
     public void addFamily(FatherDTO fatherDTO, List<ChildDTO> childs) {
@@ -157,5 +160,19 @@ public class FamilyService {
         }
 
         return date;
+    }
+
+    public void readFamily(Long id) {
+
+        Family family = familyRepository.findFirstById(id);
+        FatherDTO fatherDTO = fatherService.toFatherDTO(
+                fatherRepository.findFirstById(family.getFather().getId())
+        );
+        List<ChildDTO> childs = childService.toChildListDTO(
+                childRepository.findAllByFamilyId(id)
+        );
+        System.out.println("");
+        sess.setAttribute("father", fatherDTO);
+        sess.setAttribute("children", childs);
     }
 }

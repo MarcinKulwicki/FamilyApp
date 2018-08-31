@@ -13,6 +13,7 @@ public interface ChildRepository extends JpaRepository<Child, Long> {
 
     Child findFirstByPesel(String name);
 
+    List<Child> findAllByFamilyId(Long id);
 
     @Query(value = "SELECT * FROM family.child where first_name like :pFirstName and second_name like :pSecondName and sex like :pSex and pesel like :pPesel and pesel like :pDate" , nativeQuery = true)
     List<Child> findAllBySearchParameters(@Param("pFirstName") String fistName, @Param("pSecondName") String secondName, @Param("pSex") String sex, @Param("pPesel") String pesel, @Param("pDate") String date);
