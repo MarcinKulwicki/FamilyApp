@@ -17,6 +17,11 @@
 <body>
 <c:import url="../fragments/header.jsp"/>
 
+
+<c:if test="${not empty err}">
+    <h4>${err}</h4>
+</c:if>
+
     <form:form modelAttribute="father" method="post">
         <form:errors path="*"/><br/>
         <form:input path="firstName" placeholder="First Name"/>

@@ -8,4 +8,5 @@ import pl.marcinkulwicki.entity.Family;
 public interface FamilyRepository extends JpaRepository<Family, Long> {
 
     Family findFirstByFatherId(Long id);
+    Family findFirstById(Long id);
 }

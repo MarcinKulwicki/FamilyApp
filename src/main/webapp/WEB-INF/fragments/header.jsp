@@ -19,6 +19,9 @@
     <li class="nav-item">
         <a class="nav-link" href="/family">Family</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/family/search">Search</a>
+    </li>
     <%--<li class="nav-item">--%>
         <%--<a class="nav-link" href="#">Link</a>--%>
     <%--</li>--%>

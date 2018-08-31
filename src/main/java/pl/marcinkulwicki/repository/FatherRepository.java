@@ -8,6 +8,6 @@ import pl.marcinkulwicki.entity.Father;
 public interface FatherRepository extends JpaRepository<Father, Long> {
 
 
-
+    Father findFirstById(Long id);
     Father findFirstByPesel(String name);
 }

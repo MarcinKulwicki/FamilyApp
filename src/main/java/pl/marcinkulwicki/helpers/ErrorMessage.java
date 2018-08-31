@@ -1,0 +1,9 @@
+package pl.marcinkulwicki.helpers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ErrorMessage {
+
+
+}

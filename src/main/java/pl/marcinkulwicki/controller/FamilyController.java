@@ -2,9 +2,11 @@ package pl.marcinkulwicki.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.marcinkulwicki.DTO.ChildDTO;
@@ -24,8 +26,9 @@ public class FamilyController {
     FamilyService familyService;
 
     @GetMapping
-    public String showFamily(Model model){
+    public String showFamily(Model model, @Param("id") Long id){
 
+        if(id != null) familyService.readFamily(id);
         model.addAttribute("father", sess.getAttribute("father"));
         model.addAttribute("children", sess.getAttribute("children"));
         return "family/list";
@@ -39,5 +42,23 @@ public class FamilyController {
         familyService.addFamily(fatherDTO, children);
 
         return "redirect:/family";
+    }
+    @GetMapping("/search")
+    public String searchFamily(Model model){
+
+        ChildDTO child = new ChildDTO();
+
+        model.addAttribute("childsFind", sess.getAttribute("childsFind"));
+        model.addAttribute("sexMap", child.getSexMap());
+        model.addAttribute("child", child);
+        return "family/search";
+    }
+    @PostMapping("/search")
+    public String searchFamily(@ModelAttribute ChildDTO childDTO){
+
+        List<ChildDTO> childs = familyService.searchChild(childDTO);
+        sess.setAttribute("childsFind", childs);
+
+        return "redirect:/family/search";
     }
 }
