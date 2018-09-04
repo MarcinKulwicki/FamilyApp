@@ -94,4 +94,8 @@ public class ChildService {
         return false;
     }
 
+    public List<ChildDTO> childs(){
+        return toChildListDTO(childRepository.findAll());
+    }
+
 }

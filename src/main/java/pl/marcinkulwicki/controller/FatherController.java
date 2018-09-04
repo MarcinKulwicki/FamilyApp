@@ -35,7 +35,9 @@ public class FatherController {
     @GetMapping
     public String addFather(Model model, @Param("err") String err){
 
-        model.addAttribute("err", err.replace("_", " "));
+        if(err != null){
+            model.addAttribute("err", err.replace("_", " "));
+        }
         model.addAttribute("father", new FatherDTO());
         return "father/form";
     }
@@ -46,7 +48,7 @@ public class FatherController {
 
         System.out.println("");
             if(!bindingResult.hasErrors()){
-                System.out.println("");
+
                 if(fatherService.checkDateAndPesel(fatherDTO)){
                     sess.setAttribute("father", fatherDTO);
                     sess.setAttribute("children" , null);
@@ -54,7 +56,6 @@ public class FatherController {
                 }else {
                     err += "Pesel_and_date_invalid";
                 }
-
             }else{
                 System.out.println("Incorrect data (Father)");
                 err += "Incorrect_father_details";
