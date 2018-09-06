@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/rest/father")
+@RequestMapping("/rest")
 @CrossOrigin(origins = "http://localhost:4200")
 public class restFatherController {
 
@@ -25,20 +25,15 @@ public class restFatherController {
     @Autowired
     HttpSession sess;
 
-    @PostMapping
+    @PostMapping("/father")
     public void addFather(@RequestBody FatherDTO fatherDTO){
-
-        System.out.println(fatherDTO.getFirstName());
-        System.out.println(fatherDTO.getSecondName());
 
             if(fatherService.checkDateAndPesel(fatherDTO)){
                 sess.setAttribute("father", fatherDTO);
                 sess.setAttribute("children" , null);
-                System.out.println("FatherAddedToSess in restFatherController");
-                System.out.println(fatherDTO.getPesel());
-                System.out.println(fatherDTO.getDate().toString());
             }else {
                 System.out.println("Pesel_and_date_invalid");
+                throw new Error("Pesel and date invalid");
             }
     }
 }
