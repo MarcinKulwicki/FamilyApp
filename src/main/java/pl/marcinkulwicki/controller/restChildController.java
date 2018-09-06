@@ -27,7 +27,7 @@ public class restChildController {
     @PostMapping("/child")
     public void addChild(@RequestBody ChildDTO childDTO){
 
-            if(childService.checkPeselInDb(childDTO) && childDTO.getFirstName() == null){
+            if(childService.checkPeselInDb(childDTO) && childDTO.getFirstName() != null){
                 childService.addChildToList(childDTO);
             }else {
                 System.out.println("Children exist in Db (ChildController.addChild())");
