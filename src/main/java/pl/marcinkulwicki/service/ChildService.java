@@ -87,8 +87,8 @@ public class ChildService {
     }
 
     public boolean checkPeselInDb(ChildDTO childDTO){
-
-        if(childRepository.findFirstByPesel(childDTO.getPesel()) == null ){
+        Child child = childRepository.findFirstByPesel(childDTO.getPesel());
+        if( child == null ){
             return true;
         }
         return false;
