@@ -104,7 +104,7 @@ public class ChildService {
     public boolean checkAllChild(List<ChildDTO> childList, FatherDTO fatherDTO) {
 
         //Test for List
-        //if (!checkAllPesel(childList, fatherDTO)) return false;
+        if (!checkAllPesel(childList, fatherDTO)) return false;
 
         Iterator<ChildDTO> it = childList.iterator();
         while (it.hasNext()) {
@@ -129,16 +129,18 @@ public class ChildService {
         return true;
     }
 
-    private boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) {
-        Iterator<ChildDTO> it = childList.iterator();
-        Iterator<ChildDTO> jt = childList.iterator();
+    private boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) { //TODO check this function
 
-        while (it.hasNext()) {
-            ChildDTO childDTOi = it.next();
-            while (jt.hasNext()) {
-                if (childDTOi.getPesel().compareToIgnoreCase(jt.next().getPesel()) == 0) return false;
+        if (childList.toArray().length < 2) return true; //if child list have under 2 elements, dont check
+        for (int i = 0; i < childList.toArray().length - 2; i++) { //from 0 elem to (last elem)-1
+            for (int j = 1; i < childList.toArray().length - 1; j++) {
+
+                if (childList.get(i).getPesel().compareToIgnoreCase(
+                        childList.get(j).getPesel()
+                ) == 1) return false;
+                //child cannot have the same pesel as Father
+                if (fatherDTO.getPesel().compareToIgnoreCase(childList.get(i).getPesel()) == 1) return false;
             }
-            if (childDTOi.getPesel().compareToIgnoreCase(fatherDTO.getPesel()) == 0) return false;
         }
         return true;
     }
