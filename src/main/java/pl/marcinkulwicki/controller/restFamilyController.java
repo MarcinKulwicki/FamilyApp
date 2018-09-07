@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.marcinkulwicki.DTO.ChildDTO;
+import pl.marcinkulwicki.DTO.FamilyDTO;
 import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.service.ChildService;
 import pl.marcinkulwicki.service.FamilyService;
@@ -28,8 +29,12 @@ public class restFamilyController {
 
 
     @PostMapping("/familyAdd")
-    public void addFamily(@RequestBody FatherDTO fatherDTO, @RequestBody List<ChildDTO> childList) {
+    public void addFamily(@RequestBody FamilyDTO familyDTO) {
 
+        if(familyDTO.getFatherDTO() == null) throw new Error("Father Details are incorrect");
+        if(familyDTO.getChildrenDTO() == null) throw new Error("Child Details are incorrect");
+        FatherDTO fatherDTO = familyDTO.getFatherDTO();
+        List<ChildDTO> childList = familyDTO.getChildrenDTO();
 
         if (fatherService.checkFather(fatherDTO)) {
             if (childService.checkAllChild(childList, fatherDTO)) {

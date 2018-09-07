@@ -84,7 +84,7 @@ public class FatherService {
 
     public boolean checkFather(FatherDTO fatherDTO) {
 
-        if (!checkPeselIsNumber(fatherDTO)) return false;
+        //if (!checkPeselIsNumber(fatherDTO)) return false;
         if (!checkDateAndPesel(fatherDTO)) return false;
         if (!checkMoreThanTwoLetter(fatherDTO)) return false;
         if (!checkPeselInDb(fatherDTO)) return false;

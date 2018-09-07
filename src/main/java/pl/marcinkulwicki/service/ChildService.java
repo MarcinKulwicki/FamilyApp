@@ -104,7 +104,7 @@ public class ChildService {
     public boolean checkAllChild(List<ChildDTO> childList, FatherDTO fatherDTO) {
 
         //Test for List
-        if (!checkAllPesel(childList, fatherDTO)) return false;
+        //if (!checkAllPesel(childList, fatherDTO)) return false;
 
         Iterator<ChildDTO> it = childList.iterator();
         while (it.hasNext()) {
@@ -112,7 +112,7 @@ public class ChildService {
 
             //Test for Child
             if (!checkMoreThanTwoLetter(childDTO)) return false;
-            if (!checkPeselIsNumber(childDTO)) return false;
+            //if (!checkPeselIsNumber(childDTO)) return false;
             if (!checkPeselInDb(childDTO)) return false;
         }
 
