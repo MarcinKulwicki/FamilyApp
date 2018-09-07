@@ -1,6 +1,8 @@
 package pl.marcinkulwicki.DTO;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FamilyDTO {
@@ -36,4 +38,5 @@ public class FamilyDTO {
     public void setChildrenDTO(List<ChildDTO> childrenDTO) {
         this.childrenDTO = childrenDTO;
     }
+
 }

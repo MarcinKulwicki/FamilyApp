@@ -2,6 +2,7 @@ package pl.marcinkulwicki.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.marcinkulwicki.DTO.ChildDTO;
 import pl.marcinkulwicki.DTO.FamilyDTO;
 import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.entity.Father;
@@ -20,7 +21,7 @@ public class FatherService {
 
     public boolean addFather(FatherDTO fatherDTO) {
 
-        if(!checkDateAndPesel(fatherDTO)){
+        if (!checkDateAndPesel(fatherDTO)) {
             return false;
         }
         fatherRepository.save(toFather(fatherDTO));
@@ -32,17 +33,17 @@ public class FatherService {
 
         String date = dateFormat.format(fatherDTO.getDate());
         String pesel = fatherDTO.getPesel();
-        if(pesel.charAt(2)=='0' || pesel.charAt(2)=='1' ){
-            pesel = pesel.substring(4,6)+"-"+pesel.substring(2,4)+"-19"+pesel.substring(0,2);
-        }else{
-            Integer a = Integer.parseInt(pesel.charAt(2)+"");
+        if (pesel.charAt(2) == '0' || pesel.charAt(2) == '1') {
+            pesel = pesel.substring(4, 6) + "-" + pesel.substring(2, 4) + "-19" + pesel.substring(0, 2);
+        } else {
+            Integer a = Integer.parseInt(pesel.charAt(2) + "");
             a = a - 2;
-            pesel = pesel.substring(4,6)+"-"+a+pesel.charAt(3)+"-20"+pesel.substring(0,2);
+            pesel = pesel.substring(4, 6) + "-" + a + pesel.charAt(3) + "-20" + pesel.substring(0, 2);
         }
-        if(date.compareTo(pesel) == 0){
-            if(checkPeselInDb(fatherDTO)){
+        if (date.compareTo(pesel) == 0) {
+            if (checkPeselInDb(fatherDTO)) {
                 return true;
-            }else {
+            } else {
 
                 System.out.println("multiple pesel in dB (FatherService.checkDateAndPesel -> checkPeselInDb)");
             }
@@ -73,11 +74,39 @@ public class FatherService {
         return fatherDTO;
     }
 
-    private boolean checkPeselInDb(FatherDTO fatherDTO){
+    private boolean checkPeselInDb(FatherDTO fatherDTO) {
 
-        if(fatherRepository.findFirstByPesel(fatherDTO.getPesel()) == null ){
+        if (fatherRepository.findFirstByPesel(fatherDTO.getPesel()) == null) {
             return true;
         }
         return false;
+    }
+
+    public boolean checkFather(FatherDTO fatherDTO) {
+
+        //if (!checkPeselIsNumber(fatherDTO)) return false;
+        if (!checkDateAndPesel(fatherDTO)) return false;
+        if (!checkMoreThanTwoLetter(fatherDTO)) return false;
+        if (!checkPeselInDb(fatherDTO)) return false;
+
+        return true;
+    }
+
+    private boolean checkMoreThanTwoLetter(FatherDTO fatherDTO) {
+        if (fatherDTO.getFirstName() != null && fatherDTO.getSecondName() != null) {
+            if (fatherDTO.getFirstName().length() > 2 && fatherDTO.getSecondName().length() > 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkPeselIsNumber(FatherDTO fatherDTO) {
+        try {
+            Integer.parseInt(fatherDTO.getPesel());
+        } catch (NullPointerException | NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
