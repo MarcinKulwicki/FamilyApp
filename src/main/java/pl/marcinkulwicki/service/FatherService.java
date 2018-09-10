@@ -84,7 +84,7 @@ public class FatherService {
 
     public boolean checkFather(FatherDTO fatherDTO) {
 
-        //if (!checkPeselIsNumber(fatherDTO)) return false;
+        if (!checkPeselIsNumber(fatherDTO)) return false;
         if (!checkDateAndPesel(fatherDTO)) return false;
         if (!checkMoreThanTwoLetter(fatherDTO)) return false;
         if (!checkPeselInDb(fatherDTO)) return false;
@@ -101,9 +101,9 @@ public class FatherService {
         return false;
     }
 
-    private boolean checkPeselIsNumber(FatherDTO fatherDTO) {
+    private boolean checkPeselIsNumber(FatherDTO fatherDTO) { //TODO check this
         try {
-            Integer.parseInt(fatherDTO.getPesel());
+            Double.parseDouble(fatherDTO.getPesel());
         } catch (NullPointerException | NumberFormatException e) {
             return false;
         }
