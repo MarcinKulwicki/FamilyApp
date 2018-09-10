@@ -112,7 +112,7 @@ public class ChildService {
 
             //Test for Child
             if (!checkMoreThanTwoLetter(childDTO)) return false;
-            //if (!checkPeselIsNumber(childDTO)) return false;
+            if (!checkPeselIsNumber(childDTO)) return false;
             if (!checkPeselInDb(childDTO)) return false;
         }
 
@@ -122,25 +122,28 @@ public class ChildService {
 
     private boolean checkPeselIsNumber(ChildDTO childDTO) {
         try {
-            Integer.parseInt(childDTO.getPesel());
+            Double.parseDouble(childDTO.getPesel());
         } catch (NullPointerException | NumberFormatException e) {
             return false;
         }
         return true;
     }
 
-    private boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) { //TODO check this function
+    private boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) {
 
         if (childList.toArray().length < 2) return true; //if child list have under 2 elements, dont check
-        for (int i = 0; i < childList.toArray().length - 2; i++) { //from 0 elem to (last elem)-1
-            for (int j = 1; i < childList.toArray().length - 1; j++) {
 
-                if (childList.get(i).getPesel().compareToIgnoreCase(
+        for (int i = 0; i < childList.toArray().length - 1; i++) { //from 0 elem to (last elem)-1
+            for (int j = i + 1; j < childList.toArray().length; j++) {
+                if (childList.get(i).getPesel().equals(
                         childList.get(j).getPesel()
-                ) == 1) return false;
+                )) return false;
                 //child cannot have the same pesel as Father
-                if (fatherDTO.getPesel().compareToIgnoreCase(childList.get(i).getPesel()) == 1) return false;
             }
+        }
+        Iterator<ChildDTO> it = childList.iterator();
+        while (it.hasNext()) {
+            if (it.next().getPesel().equals(fatherDTO.getPesel())) return false;
         }
         return true;
     }
