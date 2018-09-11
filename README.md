@@ -20,17 +20,17 @@ Aktualnie child i father jest niepotrzebny ale w przyszlosci familyAdd zostanie 
 
 
 ###ChildDTO###
-Long id;
-String firstName;
-String secondName;
-String pesel;
-String sex;
-FamilyDTO familyDTO;
-String date; -- Data wyznaczana po peselu
-Map< String, String > sexMap = new HashMap<>();
+(Long id;)
+(String firstName;)
+(String secondName;)
+(String pesel;)
+(String sex;)
+(FamilyDTO familyDTO;)
+(String date; -- Data wyznaczana po peselu)
+(Map< String, String > sexMap = new HashMap<>();
         sexMap.put("man", "Man");
         sexMap.put("woman", "Woman");
-        sexMap.put("other", "Other");
+        sexMap.put("other", "Other");)
         
 ###FatherDTO###
 Long id;
