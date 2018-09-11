@@ -30,7 +30,7 @@ Aktualnie child i father jest niepotrzebny ale w przyszlosci familyAdd zostanie 
 {{sexMap: Options: Man , Woman , Other}}
         
 ###FatherDTO###
-{{if: Long}}
+{{id: Long}}
 {{firstName: String}}
 {{secondName: String}}
 {{pesel: String}}
