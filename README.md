@@ -20,27 +20,24 @@ Aktualnie child i father jest niepotrzebny ale w przyszlosci familyAdd zostanie 
 
 
 ###ChildDTO###
-(Long id;)
-(String firstName;)
-(String secondName;)
-(String pesel;)
-(String sex;)
-(FamilyDTO familyDTO;)
-(String date; -- Data wyznaczana po peselu)
-(Map< String, String > sexMap = new HashMap<>();
-        sexMap.put("man", "Man");
-        sexMap.put("woman", "Woman");
-        sexMap.put("other", "Other");)
+{{id: Long}}
+{{firstName: String}}
+{{secondName: String}}
+{{pesel: String}}
+{{sex: String}}
+{{familyDTO: FamilyDTO}}
+{{date: String}} -- Data wyznaczana po peselu
+{{sexMap: Options: Man , Woman , Other}}
         
 ###FatherDTO###
-Long id;
-String firstName;
-String secondName;
-String pesel;
-Date date;
-List<FamilyDTO> familiesDTO;
+{{if: Long}}
+{{firstName: String}}
+{{secondName: String}}
+{{pesel: String}}
+{{date: Date}}
+{{amiliesDTO: List<FamilyDTO>}}
 
 ###FamilyDTO###
-Long id;
-FatherDTO fatherDTO;
-List<ChildDTO> childrenDTO;
+{{id: Long}}
+{{fatherDTO: FatherDTO}}
+{{childrenDTO: List<ChildDTO>}}
