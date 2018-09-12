@@ -47,4 +47,14 @@ public class restFamilyController {
         }
 
     }
+
+    @PostMapping("/search")
+    public List<ChildDTO> searchFamily(@RequestBody ChildDTO childDTO){
+
+        List<ChildDTO> childs = familyService.searchChild(childDTO);
+        childs.sort((o1, o2) -> o1.getSecondName().compareToIgnoreCase(o2.getSecondName()));
+        sess.setAttribute("childsFind", childs);
+
+        return childs;
+    }
 }
