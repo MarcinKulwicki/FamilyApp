@@ -1,6 +1,7 @@
 package pl.marcinkulwicki.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.marcinkulwicki.DTO.ChildDTO;
@@ -11,6 +12,7 @@ import pl.marcinkulwicki.service.FamilyService;
 import pl.marcinkulwicki.service.FatherService;
 
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -56,5 +58,19 @@ public class restFamilyController {
         sess.setAttribute("childsFind", childs);
 
         return childs;
+    }
+
+    @GetMapping("/search")
+    public FamilyDTO showFamily(@Param("id") Long id, Model model){
+        FamilyDTO familyDTO = new FamilyDTO();
+        if(id != null) familyService.readFamily(id);
+
+        familyDTO.setFatherDTO((FatherDTO) sess.getAttribute("father"));
+
+        List<ChildDTO> childs = (List<ChildDTO>)sess.getAttribute("children");
+        childs.sort(Comparator.comparing(ChildDTO::getSecondName));
+        familyDTO.setChildrenDTO(childs);
+
+        return familyDTO;
     }
 }
