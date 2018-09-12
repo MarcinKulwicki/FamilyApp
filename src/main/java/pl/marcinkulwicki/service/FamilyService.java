@@ -125,7 +125,7 @@ public class FamilyService {
             childQuery.setSecondName("%");
         }
         //Sex
-        if(childQuery.getSex().length() < 3){
+        if(childQuery.getSex() == null || childQuery.getSex().length() < 3){
             childQuery.setSex("%");
         }
         //Pesel
