@@ -30,10 +30,12 @@ public class restFamilyController {
 
 
     @PostMapping("/familyAdd")
-    public void addFamily(@RequestBody FamilyDTO familyDTO) {
+    public String addFamily(@RequestBody FamilyDTO familyDTO) {
 
-        if (familyDTO.getFatherDTO() == null) throw new Error("Father Details are incorrect");
-        if (familyDTO.getChildrenDTO() == null) throw new Error("Child Details are incorrect");
+
+
+        if (familyDTO.getFatherDTO() == null) return "You need add father";
+        if (familyDTO.getChildrenDTO().size() < 1) return "You need add child";
         FatherDTO fatherDTO = familyDTO.getFatherDTO();
         List<ChildDTO> childList = familyDTO.getChildrenDTO();
 
@@ -41,11 +43,12 @@ public class restFamilyController {
             if (childService.checkAllChild(childList, fatherDTO)) {
                 familyService.addFamily(fatherDTO, childList);
             } else {
-                throw new Error("Child Details are incorrect");
+                return ("Child Details are incorrect");
             }
         } else {
-            throw new Error("Father Details are incorrect");
+            return ("Father Details are incorrect");
         }
+        return "Family added";
     }
 
     @PostMapping("/search")
