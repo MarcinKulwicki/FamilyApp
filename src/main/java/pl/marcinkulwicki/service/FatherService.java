@@ -2,16 +2,11 @@ package pl.marcinkulwicki.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.marcinkulwicki.DTO.ChildDTO;
-import pl.marcinkulwicki.DTO.FamilyDTO;
 import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.entity.Father;
 import pl.marcinkulwicki.repository.FatherRepository;
-
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Component
 public class FatherService {
@@ -30,7 +25,7 @@ public class FatherService {
 
     public boolean checkDateAndPesel(FatherDTO fatherDTO) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+        if(fatherDTO.getDate() == null) return false;
         String date = dateFormat.format(fatherDTO.getDate());
         String pesel = fatherDTO.getPesel();
         if (pesel.charAt(2) == '0' || pesel.charAt(2) == '1') {
