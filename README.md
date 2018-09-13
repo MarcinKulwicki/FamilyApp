@@ -8,15 +8,16 @@ Aplikacja monolityczna pozwalajaca dodawnie Ojca, Dziecka, tworzenie rodzin, wys
 Aplikacja wystawia tez serwer Restowy:
 
 :8080/rest/familyAdd
-przyjmuje: FamilyDTO i dodaje do bazy --aktualnie jedyny sposob dodania rodziny do bazy
+POST (FamilyDTO){return string;}
+przyjmuje FamilyDTO i dodaje do bazy, zwraca String z komunikatem
 
-:8080/rest/child
-przyjmuje: ChildDTO i dodaje go do listy dzieci w sesji
-
-:8080/rest/father
-przyjmuje: FatherDTO i dodaje ojca do sesji
-
-Aktualnie child i father jest niepotrzebny ale w przyszlosci familyAdd zostanie zastapiony aby pobierac obiekty z sesji
+:8080/rest/search
+POST (ChildDTO){return List<ChildDTO>;} with FamilyDTO.id
+przyjmuje ChildDTO, przeszukuje baze po parametrach, zwraca liste dzieci spelniajacych kryteria
+        
+:8080/res/search?id=
+GET (int [childDTO.familyDTO.id]) {return familyDTO;}
+przyjmuje parametr id z pola FamilyDTO.id w ChildDTO, zwaraca rodzine.
 
 
 ###ChildDTO###
