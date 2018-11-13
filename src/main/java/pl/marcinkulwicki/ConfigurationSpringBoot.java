@@ -6,6 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -15,7 +16,8 @@ import javax.validation.Validator;
 import java.util.Arrays;
 
 @Configuration
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "pl.marcinkulwicki")
+//@ComponentScan("pl.marcinkulwicki")
 @EnableJpaAuditing
 public class ConfigurationSpringBoot extends SpringBootServletInitializer {
 
