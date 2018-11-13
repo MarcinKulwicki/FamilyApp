@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.pl.PESEL;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class FatherDTO {
 
@@ -20,6 +21,22 @@ public class FatherDTO {
     private List<FamilyDTO> familiesDTO;
 
     public FatherDTO() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FatherDTO)) return false;
+        FatherDTO fatherDTO = (FatherDTO) o;
+        return Objects.equals(getFirstName(), fatherDTO.getFirstName()) &&
+                Objects.equals(getSecondName(), fatherDTO.getSecondName()) &&
+                Objects.equals(getPesel(), fatherDTO.getPesel()) &&
+                Objects.equals(getDate(), fatherDTO.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFirstName(), getSecondName(), getPesel(), getDate());
     }
 
     public Long getId() {

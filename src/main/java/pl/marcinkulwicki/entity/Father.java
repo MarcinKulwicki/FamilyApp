@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "father")
@@ -45,6 +46,28 @@ public class Father {
         this.firstName = firstName;
         this.secondName = secondName;
         this.pesel = pesel;
+    }
+    public Father(String firstName, String secondName, String pesel, Date date) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+        this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Father)) return false;
+        Father father = (Father) o;
+        return Objects.equals(getFirstName(), father.getFirstName()) &&
+                Objects.equals(getSecondName(), father.getSecondName()) &&
+                Objects.equals(getPesel(), father.getPesel()) &&
+                Objects.equals(getDate(), father.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFirstName(), getSecondName(), getPesel(), getDate());
     }
 
     public Long getId() {

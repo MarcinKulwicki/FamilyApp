@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.marcinkulwicki.DTO.FatherDTO;
 import pl.marcinkulwicki.entity.Father;
 import pl.marcinkulwicki.repository.FatherRepository;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -14,12 +15,7 @@ public class FatherService {
     @Autowired
     FatherRepository fatherRepository;
 
-//    FatherService(){
-//        super();
-//    }
-
-
-    //Do Bazy
+    //Tested (Save to DB)
     public boolean addFather(FatherDTO fatherDTO) {
 
         if (!checkDateAndPesel(fatherDTO)) {
@@ -29,10 +25,10 @@ public class FatherService {
         return true;
     }
 
-    //Bez bazy
+    //Tested
     public boolean checkDateAndPesel(FatherDTO fatherDTO) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        if(fatherDTO.getDate() == null) return false;
+        if (fatherDTO.getDate() == null) return false;
         String date = dateFormat.format(fatherDTO.getDate());
         String pesel = fatherDTO.getPesel();
         if (pesel.charAt(2) == '0' || pesel.charAt(2) == '1') {
@@ -54,7 +50,7 @@ public class FatherService {
         return false;
     }
 
-    //Bez bazy
+    //Tested - Java Work
     public Father toFather(FatherDTO fatherDTO) {
 
         Father father = new Father();
@@ -66,7 +62,7 @@ public class FatherService {
         return father;
     }
 
-    //Bez bazy
+    //Tested - Java Work
     public FatherDTO toFatherDTO(Father father) {
 
         FatherDTO fatherDTO = new FatherDTO();
@@ -78,7 +74,7 @@ public class FatherService {
         return fatherDTO;
     }
 
-    //Z baza :D
+    //Tested
     public boolean checkPeselInDb(FatherDTO fatherDTO) {
 
         if (fatherRepository.findFirstByPesel(fatherDTO.getPesel()) == null) {
@@ -87,17 +83,18 @@ public class FatherService {
         return false;
     }
 
+    //Tested
     public boolean checkFather(FatherDTO fatherDTO) {
 
         if (!checkPeselIsNumber(fatherDTO)) return false;
         if (!checkDateAndPesel(fatherDTO)) return false;
         if (!checkMoreThanTwoLetter(fatherDTO)) return false;
-        if (!checkPeselInDb(fatherDTO)) return false;
 
         return true;
     }
 
-    private boolean checkMoreThanTwoLetter(FatherDTO fatherDTO) {
+    //Tested
+    public boolean checkMoreThanTwoLetter(FatherDTO fatherDTO) {
         if (fatherDTO.getFirstName() != null && fatherDTO.getSecondName() != null) {
             if (fatherDTO.getFirstName().length() > 2 && fatherDTO.getSecondName().length() > 2) {
                 return true;
@@ -106,7 +103,8 @@ public class FatherService {
         return false;
     }
 
-    private boolean checkPeselIsNumber(FatherDTO fatherDTO) { //TODO check this
+    //Tested
+    public boolean checkPeselIsNumber(FatherDTO fatherDTO) {
         try {
             Double.parseDouble(fatherDTO.getPesel());
         } catch (NullPointerException | NumberFormatException e) {
