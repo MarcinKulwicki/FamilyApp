@@ -41,6 +41,12 @@ public class Father {
     public Father() {
     }
 
+    public Father(String firstName, String secondName, String pesel) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+    }
+
     public Long getId() {
         return id;
     }

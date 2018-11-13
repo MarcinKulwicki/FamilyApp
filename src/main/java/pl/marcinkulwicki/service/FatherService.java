@@ -14,6 +14,12 @@ public class FatherService {
     @Autowired
     FatherRepository fatherRepository;
 
+//    FatherService(){
+//        super();
+//    }
+
+
+    //Do Bazy
     public boolean addFather(FatherDTO fatherDTO) {
 
         if (!checkDateAndPesel(fatherDTO)) {
@@ -23,6 +29,7 @@ public class FatherService {
         return true;
     }
 
+    //Bez bazy
     public boolean checkDateAndPesel(FatherDTO fatherDTO) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         if(fatherDTO.getDate() == null) return false;
@@ -47,6 +54,7 @@ public class FatherService {
         return false;
     }
 
+    //Bez bazy
     public Father toFather(FatherDTO fatherDTO) {
 
         Father father = new Father();
@@ -58,6 +66,7 @@ public class FatherService {
         return father;
     }
 
+    //Bez bazy
     public FatherDTO toFatherDTO(Father father) {
 
         FatherDTO fatherDTO = new FatherDTO();
@@ -69,7 +78,8 @@ public class FatherService {
         return fatherDTO;
     }
 
-    private boolean checkPeselInDb(FatherDTO fatherDTO) {
+    //Z baza :D
+    public boolean checkPeselInDb(FatherDTO fatherDTO) {
 
         if (fatherRepository.findFirstByPesel(fatherDTO.getPesel()) == null) {
             return true;
