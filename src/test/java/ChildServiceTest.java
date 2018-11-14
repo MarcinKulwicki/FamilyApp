@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+//import static org.mockito.Matchers.any;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,14 @@ public class ChildServiceTest {
         this.childs.add(new Child("Ala", "Potocki", "81051555824", "Woman"));
         this.childs.add(new Child("Tosia", "Potocki", "82061132399", "Woman"));
         this.childs.add(new Child("Andrzej", "Polecki", "79041875582", "Man"));
+    }
+
+    @Test
+    public void testAadChild() {
+        when(childRepositoryMock.save(any(Child.class))).thenReturn(this.child);
+
+        assertEquals(true, childImpl.addChild(this.childDTO));
+        assertNotEquals(true, childImpl.addChild(null));
     }
 
     @Test

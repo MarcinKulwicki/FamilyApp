@@ -24,7 +24,7 @@ public class ChildService {
     FamilyService familyService;
 
 
-    //TODO Check it
+    //I don't see sens of testing, function Deprecated
     public boolean addChilds(List<ChildDTO> childs) {
 
         Iterator<ChildDTO> it = childs.iterator();
@@ -38,14 +38,15 @@ public class ChildService {
         return true;
     }
 
-    //TODO Check it
-    private boolean addChild(ChildDTO childDTO) {
+    //Tested
+    public boolean addChild(ChildDTO childDTO) {
+        if(childDTO == null) return false;
         Child child = toChild(childDTO);
         childRepository.save(child);
         return true;
     }
 
-    //TODO Check it
+    //I don't see sens of testing, function Deprecated
     public boolean addChildToList(ChildDTO childDTO) throws NullPointerException {
 
         List<ChildDTO> children = (List<ChildDTO>) sess.getAttribute("children");

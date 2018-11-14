@@ -35,7 +35,7 @@ public class FamilyService {
     @Autowired
     HttpSession sess;
 
-
+    //TODO Check it
     public void addFamily(FatherDTO fatherDTO, List<ChildDTO> childs) {
 
         //CREATE FAMILY
@@ -52,10 +52,12 @@ public class FamilyService {
         }
     }
 
+    //TODO
     private void createFamily(Family family){
         familyRepository.save(family);
     }
 
+    //TODO
     private void addFatherToFamily(Family family , FatherDTO fatherDTO){
         //addFatherToDb
         fatherService.addFather(fatherDTO);
@@ -67,7 +69,8 @@ public class FamilyService {
         createFamily(family);
     }
 
-    private void addChildToFamily(Family family, ChildDTO childDTO) {
+    //TODO invoked test
+    public void addChildToFamily(Family family, ChildDTO childDTO) {
 
         //Search in base, if this child is alredy exsist
         Child child = childRepository.findFirstByPesel(childDTO.getPesel());
@@ -79,6 +82,7 @@ public class FamilyService {
         }
     }
 
+    //JAVA WORKS
     public FamilyDTO toFamilyDTO(Family family){
         FamilyDTO familyDTO = new FamilyDTO();
         familyDTO.setId(family.getId());
@@ -87,6 +91,7 @@ public class FamilyService {
         return familyDTO;
     }
 
+    //JAVA WORKS
     public Family toFamily(FamilyDTO familyDTO){
         Family family = new Family();
         family.setId(familyDTO.getId());
@@ -96,6 +101,7 @@ public class FamilyService {
     }
 
 
+    //Tested
     public List<ChildDTO> searchChild(ChildDTO childDTO) {
 
         childDTO = convertChildDTOToQuery(childDTO);
@@ -111,10 +117,12 @@ public class FamilyService {
         System.out.println("");
 
 
-        return childService.toChildListDTO(childs);
+        List<ChildDTO> childsDTO = childService.toChildListDTO(childs);
+        return childsDTO;
     }
 
-    private ChildDTO convertChildDTOToQuery(ChildDTO childQuery) {
+    //Tested
+    public ChildDTO convertChildDTOToQuery(ChildDTO childQuery) {
 
         //FirstName
         if(childQuery.getFirstName() == null || childQuery.getFirstName().length() < 3){
@@ -129,7 +137,7 @@ public class FamilyService {
             childQuery.setSex("%");
         }
         //Pesel
-        if(childQuery.getPesel() == null || childQuery.getSecondName().length() < 6){
+        if(childQuery.getPesel() == null || childQuery.getPesel().length() < 6){
             childQuery.setPesel("%");
         }
         //Date
@@ -138,7 +146,8 @@ public class FamilyService {
         return childQuery;
     }
 
-    private String convertDateToPesel(String date) {
+    //Tested
+    public String convertDateToPesel(String date) {
 
         DateMatcher dateMatcher = new GregorianDateMatcher();
 
@@ -162,6 +171,7 @@ public class FamilyService {
         return date;
     }
 
+    //TODO Check it in Last
     public void readFamily(Long id) {
 
         Family family = familyRepository.findFirstById(id);
