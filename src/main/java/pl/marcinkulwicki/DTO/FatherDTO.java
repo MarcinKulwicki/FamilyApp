@@ -23,6 +23,12 @@ public class FatherDTO {
     public FatherDTO() {
     }
 
+    public FatherDTO(String firstName, String secondName, String pesel) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -45,6 +45,13 @@ public class Child {
     public Child() {
     }
 
+    public Child(String firstName, String secondName, String pesel, String sex) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+        this.sex = sex;
+    }
+
     public Long getId() {
         return id;
     }

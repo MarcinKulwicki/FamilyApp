@@ -23,6 +23,8 @@ public class ChildService {
     @Autowired
     FamilyService familyService;
 
+
+    //TODO Check it
     public boolean addChilds(List<ChildDTO> childs) {
 
         Iterator<ChildDTO> it = childs.iterator();
@@ -36,13 +38,15 @@ public class ChildService {
         return true;
     }
 
+    //TODO Check it
     private boolean addChild(ChildDTO childDTO) {
         Child child = toChild(childDTO);
         childRepository.save(child);
         return true;
     }
 
-    public boolean addChildToList(ChildDTO childDTO) {
+    //TODO Check it
+    public boolean addChildToList(ChildDTO childDTO) throws NullPointerException {
 
         List<ChildDTO> children = (List<ChildDTO>) sess.getAttribute("children");
         if (children == null) {
@@ -53,7 +57,8 @@ public class ChildService {
         return true;
     }
 
-    public Child toChild(ChildDTO childDTO) {
+    //Tested
+    public Child toChild(ChildDTO childDTO) throws NullPointerException{
         Child child = new Child();
 
 
@@ -61,25 +66,28 @@ public class ChildService {
         child.setSecondName(childDTO.getSecondName());
         child.setPesel(childDTO.getPesel());
         child.setSex(childDTO.getSex());
-//        child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
+        if(childDTO.getFamilyDTO() != null) child.setFamily(familyService.toFamily(childDTO.getFamilyDTO()));
         return child;
     }
 
-    private ChildDTO toChildDTO(Child child) {
+    //Tested
+    public ChildDTO toChildDTO(Child child) {
         ChildDTO childDTO = new ChildDTO();
 
         childDTO.setFirstName(child.getFirstName());
         childDTO.setSecondName(child.getSecondName());
         childDTO.setPesel(child.getPesel());
         childDTO.setSex(child.getSex());
-        childDTO.setFamilyDTO(familyService.toFamilyDTO(child.getFamily()));
+        if(child.getFamily() != null) childDTO.setFamilyDTO(familyService.toFamilyDTO(child.getFamily()));
 
         return childDTO;
     }
 
+    //Tested
     public List<ChildDTO> toChildListDTO(List<Child> childs) {
 
         List<ChildDTO> childsDTO = new ArrayList<>();
+        if(childs == null) childsDTO.add(new ChildDTO());
 
         Iterator<Child> it = childs.iterator();
         while (it.hasNext()) {
@@ -89,6 +97,7 @@ public class ChildService {
         return childsDTO;
     }
 
+    //Tested
     public boolean checkPeselInDb(ChildDTO childDTO) {
         Child child = childRepository.findFirstByPesel(childDTO.getPesel());
         if (child == null) {
@@ -97,10 +106,13 @@ public class ChildService {
         return false;
     }
 
+    //Tested
     public List<ChildDTO> childs() {
+
         return toChildListDTO(childRepository.findAll());
     }
 
+    //Tested
     public boolean checkAllChild(List<ChildDTO> childList, FatherDTO fatherDTO) {
 
         //Test for List
@@ -120,7 +132,8 @@ public class ChildService {
         return true;
     }
 
-    private boolean checkPeselIsNumber(ChildDTO childDTO) {
+    //Tested
+    public boolean checkPeselIsNumber(ChildDTO childDTO) {
         try {
             Double.parseDouble(childDTO.getPesel());
         } catch (NullPointerException | NumberFormatException e) {
@@ -129,7 +142,10 @@ public class ChildService {
         return true;
     }
 
-    private boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) {
+    //Tested
+    public boolean checkAllPesel(List<ChildDTO> childList, FatherDTO fatherDTO) {
+
+        if(childList == null || fatherDTO == null) return false;
 
         if (childList.toArray().length < 2) return true; //if child list have under 2 elements, dont check
 
@@ -148,7 +164,8 @@ public class ChildService {
         return true;
     }
 
-    private boolean checkMoreThanTwoLetter(ChildDTO childDTO) {
+    //Tested
+    public boolean checkMoreThanTwoLetter(ChildDTO childDTO) {
 
         if (childDTO.getFirstName() != null && childDTO.getSecondName() != null) {
             if (childDTO.getFirstName().length() > 2 && childDTO.getSecondName().length() > 2) {

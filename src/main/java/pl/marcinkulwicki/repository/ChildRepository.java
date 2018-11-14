@@ -20,5 +20,6 @@ public interface ChildRepository extends JpaRepository<Child, Long> {
     @Query(value = "SELECT * FROM family.child where first_name like :pFirstName and second_name like :pSecondName and sex like :pSex and pesel like :pPesel and pesel like :pDate" , nativeQuery = true)
     List<Child> findAllBySearchParameters(@Param("pFirstName") String fistName, @Param("pSecondName") String secondName, @Param("pSex") String sex, @Param("pPesel") String pesel, @Param("pDate") String date);
 
+    List<Child> findAll();
     //Date is compare to pesele using for example 921129% then you must convert Date 1992/11/29 to 921129%
 }

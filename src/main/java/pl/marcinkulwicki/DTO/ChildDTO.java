@@ -30,6 +30,18 @@ public class ChildDTO {
         sexMap.put("other", "Other");
     }
 
+    public ChildDTO(String firstName, String secondName, String pesel) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+    }
+    public ChildDTO(String firstName, String secondName, String pesel, String sex) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.pesel = pesel;
+        this.sex = sex;
+    }
+
     public Long getId() {
         return id;
     }

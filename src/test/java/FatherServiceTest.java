@@ -16,7 +16,6 @@ import pl.marcinkulwicki.repository.FatherRepository;
 import pl.marcinkulwicki.service.FatherService;
 
 import java.util.Date;
-import java.util.Objects;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FatherServiceTest {
