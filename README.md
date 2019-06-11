@@ -1,14 +1,19 @@
 # FamilyApp
 
-Video:
-https://drive.google.com/open?id=1emSIXHk8cr92SspJtoH9XIRPZ_C4SFp8
+Cel:
+Aplikacja powstała w celach edukacyjnych. Początkowo przybierała formę monolityczną, lecz następnie została rozwinięta o serwer restowy. 
+Funkcje:
+- Komunikacja z serverem,
+- Wystawianie restowych punktów dostępowych,
+- Testowanie jednostkowe (JUnit, Mockito),
+- Sprawdzanie poprawności danych i wysyłanie informacji zwrotnej
 
-Aplikacja monolityczna pozwalajaca dodawnie Ojca, Dziecka, tworzenie rodzin, wyszukiwanie rodzin.
+Aplikacja monolityczna:
 :8080/child
 :8080/father
 :8080/family
 
-Aplikacja wystawia tez serwer Restowy:
+Serwer Restowy:
 
 :8080/rest/familyAdd
 POST (FamilyDTO){return string;}
@@ -45,3 +50,6 @@ przyjmuje parametr id z pola FamilyDTO.id w ChildDTO, zwaraca rodzine.
 {{id: Long}}
 {{fatherDTO: FatherDTO}}
 {{childrenDTO: List<ChildDTO>}}
+        
+Video:
+https://drive.google.com/open?id=1emSIXHk8cr92SspJtoH9XIRPZ_C4SFp8
